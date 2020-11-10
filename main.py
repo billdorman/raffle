@@ -11,7 +11,8 @@ conn = pymysql.connect(host='localhost', port=3306, user='lanadmin', passwd='aco
 cur = conn.cursor()
 cur.execute("select * from items;")
 for row in cur:
-    print(row)
+    # print(row)
+    row = json.dumps(row)
 
 # jsonitems = json.dump(cur.description)
 
