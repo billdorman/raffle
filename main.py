@@ -12,6 +12,7 @@ app = Flask(__name__)
 conn = pymysql.connect(host='localhost', port=3306, user='lanadmin', passwd='acorn77tog', db='raffle')
 
 @app.route('/')
+def fetch_items():
     cur = conn.cursor()
     cur.execute("select * from items;")
     for row in cur:
