@@ -1,6 +1,7 @@
 import pymysql 
 import pymysql.cursors 
 import json 
+import flask
 
 db_host = 'localhost'
 db_user = 'lanadmin'
