@@ -1,14 +1,14 @@
 import pymysql 
 import pymysql.cursors 
 import json 
-import flask
+from flask import Flask
+
+app = Flask(__name__)
 
 db_host = 'localhost'
 db_user = 'lanadmin'
 db_pass = 'acorn77tog'
 db_name = 'raffle'
-
-app = Flask(__name__)
 
 conn = pymysql.connect(host='localhost', port=3306, user='lanadmin', passwd='acorn77tog', db='raffle')
 
@@ -27,4 +27,4 @@ def fetch_items():
     conn.close()
 
 if __name__ == '__main__':
-   app.run(debug=True)
+    app.run()
