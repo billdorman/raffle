@@ -12,7 +12,7 @@ cur = conn.cursor()
 cur.execute("select * from items;")
 for row in cur:
     # print(row)
-    row = json.dumps(row)
+    row = json.dumps(row, indent=4, sort_keys=True, default=str)
 
 # jsonitems = json.dump(cur.description)
 
