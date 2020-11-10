@@ -1,11 +1,12 @@
 import pymysql 
 import pymysql.cursors 
 import json 
+import random
 from flask import Flask
 
 app = Flask(__name__)
 
-db_host = 'localhost'
+db_host = '10.100.10.66'
 db_user = 'lanadmin'
 db_pass = 'acorn77tog'
 db_name = 'raffle'
