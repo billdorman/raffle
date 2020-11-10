@@ -10,7 +10,7 @@ db_user = 'lanadmin'
 db_pass = 'acorn77tog'
 db_name = 'raffle'
 
-conn = pymysql.connect(host='localhost', port=3306, user='lanadmin', passwd='acorn77tog', db='raffle')
+conn = pymysql.connect(host=db_host, port=3306, user=db_user, passwd=db_pass, db=db_name)
 
 @app.route('/users')
 def fetch_users():
