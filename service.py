@@ -19,9 +19,8 @@ def fetch_users():
     for row in cur:
         # print(row)
         row = json.dumps(row, indent=4, sort_keys=True, default=str)
+        #print(json.dumps({'id': 0, 'first_name': 1}, sort_keys=True, indent=4, default=str))
         return(row)
-
-    # jsonitems = json.dump(cur.description)
 
     cur.close()
     conn.close()
@@ -35,8 +34,6 @@ def fetch_items():
         row = json.dumps(row, indent=4, sort_keys=True, default=str)
         return(row)
 
-    # jsonitems = json.dump(cur.description)
-
     cur.close()
     conn.close()
 
@@ -48,8 +45,6 @@ def fetch_orders():
         # print(row)
         row = json.dumps(row, indent=4, sort_keys=True, default=str)
         return(row)
-
-    # jsonitems = json.dump(cur.description)
 
     cur.close()
     conn.close()
