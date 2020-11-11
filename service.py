@@ -3,6 +3,7 @@ import pymysql.cursors
 import json 
 import jsonify
 import random
+from flask import request
 from flask import render_template
 from flask import Flask
 
@@ -16,17 +17,17 @@ db_name = 'raffle'
 @app.route('/users')
 def fetch_users():
     conn = pymysql.connect(host=db_host, port=3306, user=db_user, passwd=db_pass, db=db_name)
+    dataset = []
     cur = conn.cursor()
     cur.execute("select * from users;")
-    data = cur.fetchall()
-    for row in data:
+    results = cur.fetchall()
+    for row in results:
         print(row)
-        row = json.dumps(row, indent=4, sort_keys=True, default=str)
-        #print(json.dumps({'id': 0, 'first_name': 1}, sort_keys=True, indent=4, default=str))
-        return(row)
+        dataset.append(row)
 
     cur.close()
     conn.close()
+    return render_template("users.html", rows=dataset)
 
 @app.route('/items')
 def fetch_items():
@@ -41,20 +42,47 @@ def fetch_items():
 
     cur.close()
     conn.close()
-    return render_template("index.html", rows=dataset)
+    return render_template("items.html", rows=dataset)
+
+@app.route('/manage/items', methods=["POST"])
+def manage_items():
+    conn = pymysql.connect(host=db_host, port=3306, user=db_user, passwd=db_pass, db=db_name)
+    cur = conn.cursor()
+    
+    item_name = request.form['item_name']
+    item_desc = request.form['item_desc']
+    item_price = request.form['item_price']
+    sold = request.form['sold']
+    creator = request.form['creator']
+    cur.execute(f'insert into items (item_name, item_desc, item_price, sold, creator) values ("{item_name}", "{item_desc}", "{item_price}", "{sold}", "{creator}");')
+    res = conn.commit()
+
+    print(res)
+    
+    cur.close()
+    conn.close()
+
+    return '', 204
+ 
+@app.route('/manage/items', methods=["GET"])
+def get_manage_items():
+    return render_template("manage-items.html")
+
 
 @app.route('/orders')
 def fetch_orders():
     conn = pymysql.connect(host=db_host, port=3306, user=db_user, passwd=db_pass, db=db_name)
+    dataset = []
     cur = conn.cursor()
     cur.execute("select * from ticket_orders;")
-    for row in cur:
+    results = cur.fetchall()
+    for row in results:
         print(row)
-        row = json.dumps(row, indent=4, sort_keys=True, default=str)
-        return(row)
+        dataset.append(row)
 
     cur.close()
     conn.close()
+    return render_template("items.html", rows=dataset)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0')

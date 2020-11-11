@@ -1,0 +1,26 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title>Raffle Monkey - Users</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+{% for item in rows %}
+<p>Id: {{item[0]}}</p>
+<p>Ticket Number: {{item[1]}}</p>
+<p>Item ID: {{item[2]}}</p>
+<p>User ID: {{item[3]}}</p>
+<p>Paid: {{item[4]}}</p>
+<p>Quantity: {{item[5]}}</p>
+<p>Square Order: {{item[6]}}</p>
+<p>Enabled: {{item[7]}}</p>
+<p>Order Total: {{item[8]}}</p>
+<p>Last Updated: {{item[9]}}</p>
+{% endfor %}
+</body>
+
+</html>

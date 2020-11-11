@@ -1,0 +1,23 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title>Raffle Monkey - Users</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+{% for item in rows %}
+<p>Id: {{item[0]}}</p>
+<p>First Name: {{item[1]}}</p>
+<p>Last Name: {{item[2]}}</p>
+<p>Email: {{item[3]}}</p>
+<p>Phone: {{item[4]}}</p>
+<p>Enabled: {{item[5]}}</p>
+<p>Last Update: {{item[6]}}</p>
+{% endfor %}
+</body>
+
+</html>
