@@ -9,11 +9,15 @@
 </head>
 
 <body>
-  <form action="/manage/items.html">
+  <form action="/manage/items" method="POST">
     <label for="item_name">Item Name:</label><br>
     <input type="text" id="item_name" name="item_name"><br>
     <label for="item_desc">Item Description:</label><br>
     <input type="text" id="item_desc" name="item_desc"><br><br>
+    <label for="item_desc">Item Price:</label><br>
+    <input type="text" id="item_price" name="item_price"><br><br>
+    <label for="item_desc">Created By:</label><br>
+    <input type="text" id="created_by" name="created_by"><br><br>
     <input type="submit" value="Submit">
   </form>
 </body>

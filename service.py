@@ -14,6 +14,8 @@ db_user = 'lanadmin'
 db_pass = 'acorn77tog'
 db_name = 'raffle'
 
+# Fetch and Manage Users
+
 @app.route('/users')
 def fetch_users():
     conn = pymysql.connect(host=db_host, port=3306, user=db_user, passwd=db_pass, db=db_name)
@@ -28,6 +30,8 @@ def fetch_users():
     cur.close()
     conn.close()
     return render_template("users.html", rows=dataset)
+
+# Fetch and Manage Items
 
 @app.route('/items')
 def fetch_items():
@@ -52,9 +56,9 @@ def manage_items():
     item_name = request.form['item_name']
     item_desc = request.form['item_desc']
     item_price = request.form['item_price']
-    sold = request.form['sold']
-    creator = request.form['creator']
-    cur.execute(f'insert into items (item_name, item_desc, item_price, sold, creator) values ("{item_name}", "{item_desc}", "{item_price}", "{sold}", "{creator}");')
+    available = request.form['available']
+    created_by = request.form['created_by']
+    cur.execute(f'insert into items (item_name, item_desc, item_price, available, created_by) values ("{item_name}", "{item_desc}", "{item_price}", "{available}", "{created_by}");')
     res = conn.commit()
 
     print(res)
@@ -65,9 +69,11 @@ def manage_items():
     return '', 204
  
 @app.route('/manage/items', methods=["GET"])
-def get_manage_items():
+def postget_manage_items():
     return render_template("manage-items.html")
 
+
+# Fetch and Manage Orders
 
 @app.route('/orders')
 def fetch_orders():
