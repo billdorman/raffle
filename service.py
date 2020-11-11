@@ -1,18 +1,16 @@
 import pymysql 
 import pymysql.cursors 
-import json 
-import jsonify
-import random
+import os
 from flask import request
 from flask import render_template
 from flask import Flask
 
 app = Flask(__name__)
 
-db_host = '10.100.10.66'
-db_user = 'lanadmin'
-db_pass = 'acorn77tog'
-db_name = 'raffle'
+db_host = os.getenv('db_host')
+db_user = os.getenv('db_user')
+db_pass = os.getenv('db_pass')
+db_name = os.getenv('db_name')
 
 # Fetch and Manage Users
 
