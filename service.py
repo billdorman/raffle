@@ -1,7 +1,9 @@
 import pymysql 
 import pymysql.cursors 
 import json 
+import jsonify
 import random
+from flask import render_template
 from flask import Flask
 
 app = Flask(__name__)
@@ -11,14 +13,14 @@ db_user = 'lanadmin'
 db_pass = 'acorn77tog'
 db_name = 'raffle'
 
-conn = pymysql.connect(host=db_host, port=3306, user=db_user, passwd=db_pass, db=db_name)
-
 @app.route('/users')
 def fetch_users():
+    conn = pymysql.connect(host=db_host, port=3306, user=db_user, passwd=db_pass, db=db_name)
     cur = conn.cursor()
     cur.execute("select * from users;")
-    for row in cur:
-        # print(row)
+    data = cur.fetchall()
+    for row in data:
+        print(row)
         row = json.dumps(row, indent=4, sort_keys=True, default=str)
         #print(json.dumps({'id': 0, 'first_name': 1}, sort_keys=True, indent=4, default=str))
         return(row)
@@ -28,22 +30,26 @@ def fetch_users():
 
 @app.route('/items')
 def fetch_items():
+    conn = pymysql.connect(host=db_host, port=3306, user=db_user, passwd=db_pass, db=db_name)
+    dataset = []
     cur = conn.cursor()
     cur.execute("select * from items;")
-    for row in cur:
-        # print(row)
-        row = json.dumps(row, indent=4, sort_keys=True, default=str)
-        return(row)
+    results = cur.fetchall()
+    for row in results:
+        print(row)
+        dataset.append(row)
 
     cur.close()
     conn.close()
+    return render_template("index.html", rows=dataset)
 
 @app.route('/orders')
 def fetch_orders():
+    conn = pymysql.connect(host=db_host, port=3306, user=db_user, passwd=db_pass, db=db_name)
     cur = conn.cursor()
     cur.execute("select * from ticket_orders;")
     for row in cur:
-        # print(row)
+        print(row)
         row = json.dumps(row, indent=4, sort_keys=True, default=str)
         return(row)
 
