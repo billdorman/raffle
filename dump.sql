@@ -53,6 +53,30 @@ INSERT INTO `items` VALUES (1,'Master Ticket','One ticket to rule them all!',20,
 UNLOCK TABLES;
 
 --
+-- Table structure for table `new_table`
+--
+
+DROP TABLE IF EXISTS `new_table`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `new_table` (
+  `images` int(11) NOT NULL AUTO_INCREMENT,
+  `item_id` int(15) DEFAULT NULL,
+  `image_url` varchar(128) DEFAULT NULL,
+  PRIMARY KEY (`images`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `new_table`
+--
+
+LOCK TABLES `new_table` WRITE;
+/*!40000 ALTER TABLE `new_table` DISABLE KEYS */;
+/*!40000 ALTER TABLE `new_table` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `orders`
 --
 
@@ -128,7 +152,7 @@ CREATE TABLE `users` (
   `password` varchar(128) DEFAULT NULL,
   `pass_salt` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COMMENT='											';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COMMENT='											';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -137,7 +161,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (0,'Bill','Dorman','bill@2048-bit.com','4172079000',1,'Test User 1','2020-11-05 00:18:01','e80b0c67e6fd0ccbeb50d914157ebc606ca470bb57f1ec704fe261091b2ac6cc','qw21s21ssdqw'),(1,'Vanessa','Dorman','vanessabrill@gmail.com','4172079001',1,'Test User 2','2020-11-10 06:26:47','9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08','23cew232323c2see12');
+INSERT INTO `users` VALUES (0,'Bill','Dorman','bill@2048-bit.com','4172079000',1,'Test User 1','2020-11-05 00:18:01','e80b0c67e6fd0ccbeb50d914157ebc606ca470bb57f1ec704fe261091b2ac6cc','qw21s21ssdqw'),(1,'Vanessa','Dorman','vanessabrill@gmail.com','4172079001',1,'Test User 2','2020-11-10 06:26:47','9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08','23cew232323c2see12'),(2,'Will','Vandergrift','will@isawesome.com','4175551212',1,'The bestest','2020-11-17 03:49:30','32443222423423423423','23432n423kj4n324n324kj32n432kl4n32');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -150,4 +174,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-11-16 23:06:54
+-- Dump completed on 2020-11-17  4:18:52

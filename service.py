@@ -4,13 +4,19 @@ import os
 from flask import request
 from flask import render_template
 from flask import Flask
+import flask_login
 
 app = Flask(__name__)
 
+app_secret = os.getenv('app_secret')
 db_host = os.getenv('db_host')
 db_user = os.getenv('db_user')
 db_pass = os.getenv('db_pass')
 db_name = os.getenv('db_name')
+
+login_manager = flask_login.LoginManager()
+
+users = {'foo@bar.tld': {'password': 'secret'}}
 
 # Fetch and Manage Users
 
@@ -29,7 +35,7 @@ def fetch_users():
     conn.close()
     return render_template("users.html", rows=dataset)
 
-@app.route('/manage/iteusersms', methods=["POST"])
+@app.route('/manage/users', methods=["POST"])
 def manage_users():
     conn = pymysql.connect(host=db_host, port=3306, user=db_user, passwd=db_pass, db=db_name)
     cur = conn.cursor()
@@ -146,5 +152,10 @@ def get_manage_orders():
 
 #Initialize Flask    
 
+
+
+
+
 if __name__ == '__main__':
+    login_manager.init_app(app)
     app.run(host='0.0.0.0')
