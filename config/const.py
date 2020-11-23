@@ -4,14 +4,14 @@ import os
 # Server Name
 SERVER_NAME = "RAFFLE_SERVER_01"
 
-BASE_URL = "https://raffle.ngrok.io"
+BASE_URL = "http://localhost"
 
 # Database
 DB_ENGINE = 'mysql+pymysql'
 DB_SERVER = os.environ.get('RAFFLE_DB_SERVER')
 DB_USER = os.environ.get('RAFFLE_DB_USER')
 DB_PASS = os.environ.get('RAFFLE_DB_PASS')
-DB_SCHEMA = 'raffle'
+DB_SCHEMA = 'raffle2'
 DB_CONNECTION_STRING = '{engine}://{user}:{password}@{server}/{schema}'.format(
     engine=DB_ENGINE, user=DB_USER, password=DB_PASS, server=DB_SERVER, schema=DB_SCHEMA)
 
@@ -34,7 +34,7 @@ JOB_INTERVAL = 60
 SCHEDULED_JOB_INTERVAL = 60
 
 # Logging Consts
-LOG_FILE_NAME = '/opt/python/log/raffle_api.log'
+LOG_FILE_NAME = 'logs/raffle_api.log'
 LOGGING_LEVEL = 'DEBUG'
 
 STATE_ABBREVIATIONS = ['NA', 'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY']
