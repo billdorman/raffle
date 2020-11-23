@@ -39,11 +39,6 @@ LOGGING_LEVEL = 'DEBUG'
 
 STATE_ABBREVIATIONS = ['NA', 'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY']
 
-# S3 Variables
-S3_BUCKET_NAME = 'raffle-project'
-S3_ACCESS_KEY = os.environ.get('RAFFLE_S3_ACCESS')
-S3_SECRET_KEY = os.environ.get('RAFFLE_S3_SECRET')
-S3_URL_EXPIRATION_TIME = 86400  # in seconds
 
 # Square Payment Processing Variables
 SQUARE_APP_ID = os.environ.get('RAFFLE_SQUARE_APP_ID')
