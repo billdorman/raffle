@@ -6,7 +6,7 @@ from services import square_service
 global app
 
 
-@scheduler.task('interval', id='process_transactions', minutes=5, misfire_grace_time=900)
+@scheduler.task('interval', id='process_transactions', minutes=1, misfire_grace_time=900)
 def process_transactions():
     print('Running Process Transactions')
     global app

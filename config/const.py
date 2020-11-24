@@ -8,9 +8,9 @@ BASE_URL = "http://localhost"
 
 # Database
 DB_ENGINE = 'mysql+pymysql'
-DB_SERVER = os.environ.get('RAFFLE_DB_SERVER')
-DB_USER = os.environ.get('RAFFLE_DB_USER')
-DB_PASS = os.environ.get('RAFFLE_DB_PASS')
+DB_SERVER = '10.100.10.66'
+DB_USER = 'lanadmin'
+DB_PASS = 'acorn77tog'
 DB_SCHEMA = 'raffle2'
 DB_CONNECTION_STRING = '{engine}://{user}:{password}@{server}/{schema}'.format(
     engine=DB_ENGINE, user=DB_USER, password=DB_PASS, server=DB_SERVER, schema=DB_SCHEMA)
