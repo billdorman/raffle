@@ -85,6 +85,7 @@ def register_post():
     # Attempt to create a user with the passed in details
     try:
         user = user_schema.load(user_data)
+        user.active = True
         user.update()
     except ValidationError as ex:
         return '', 400
