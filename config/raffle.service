@@ -1,0 +1,29 @@
+[Unit]
+Description=Raffle API Service
+After=syslog.target network.target mysqld.service
+
+[Service]
+
+Environment='RAFFLE_DB_USER=db_username'
+Environment='RAFFLE_DB_PASS=db_password'
+Environment='RAFFLE_DB_SERVER=localhost'
+
+Environment='EMAIL_API_KEY={mailgun api key}'
+Environment='EMAIL_API_URL={mailgun_api_url}'
+
+Environment='RAFFLE_DB_SCHEMA=db_schema_name'
+Environment='LOG_FILE_NAME=full_log_path'
+
+Environment='RAFFLE_SQUARE_ACCESS_TOKEN=square_access_token'
+Environment='RAFFLE_SQUARE_APP_ID=square_app_id'
+Environment='RAFFLE_SQUARE_APP_TOKEN=square_app_token'
+Environment='RAFFLE_SQUARE_LOCATION_ID=square_location_id'
+
+Type=simple
+User=username
+ExecStart=/path/to/python3 /path/to/raffle/application.py --serve-in-foreground
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
+
