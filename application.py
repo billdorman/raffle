@@ -9,6 +9,7 @@ from web import web_items
 from web import web_search
 from web import web_checkout
 from web import web_admin_items
+from web import drawing
 import logging
 
 log = logging.getLogger()
@@ -71,6 +72,7 @@ def register_blueprints(application):
     application.register_blueprint(web_search, url_prefix='/search')
     application.register_blueprint(web_checkout, url_prefix='/checkout')
     application.register_blueprint(web_admin_items, url_prefix='/admin/items')
+    application.register_blueprint(web_admin_drawing, url_prefix='/admin/drawing')
 
 
 log.info("Preparing to call create_app")
