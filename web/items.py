@@ -36,23 +36,4 @@ def items_get():
     for item in items:
         item_tickets[item.id] = sum(map(lambda ticket : ticket.item_id == item.id, tickets))
 
-    return render_template('items.html', items=items, item_tickets=item_tickets)
-
-
-# Route used to display an image by creating an S3 presigned url
-@web_items.route("/<item_id>/images/<image_id>", methods=['GET'])
-@login_required
-def item_image_view(item_id, image_id):
-    log.info("web_items.item_image_view")
-    image = ItemImage.query.get(image_id)
-
-    # Build a signed S3 url for viewing the image and redirect to it
-    client = boto3.client('s3',
-                          region_name='us-east-1',
-                          aws_access_key_id=CONSTANTS.S3_ACCESS_KEY,
-                          aws_secret_access_key=CONSTANTS.S3_SECRET_KEY)
-
-    uri = client.generate_presigned_url('get_object',
-                                        Params={'Bucket': image.s3_bucket_name, 'Key': image.s3_bucket_path},
-                                        ExpiresIn=CONSTANTS.S3_URL_EXPIRATION_TIME)
-    return redirect(uri, 302)
+    return render_template('items.html', items=items, item_tickets=item_tickets, categories=CONSTANTS.ITEM_CATEGORIES)

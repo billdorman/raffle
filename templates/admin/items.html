@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='plugins/datatables/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='plugins/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css') }}">
+{% endblock %}
+
+{% block title %}Admin - Items{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href="{{ url_for('web_items.items_get') }}">Home</a></li>
+    <li class="breadcrumb-item"><a href="javascript:void(0);">Items</a></li>
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <aside class="col-md-3">
+        <div class="card">
+        <article class="filter-group">
+            <header class="card-header">
+                <a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
+                    <i class="icon-control fa fa-chevron-down"></i>
+                    <h6 class="title">Categories</h6>
+                </a>
+            </header>
+            <div class="filter-content collapse show" id="collapse_1" style="">
+                <div class="card-body">
+                    <ul class="list-menu">
+                        <li><a href="/">All</a></li>
+                        <li><a href="/?category=electronics">Electronics</a></li>
+                        <li><a href="/?category=apparel">Apparel</a></li>
+                        <li><a href="/?category=outdoor">Outdoor</a></li>
+                    </ul>
+
+                </div> <!-- card-body.// -->
+            </div>
+        </article> <!-- filter-group  .// -->
+    </div> <!-- card.// -->
+        </aside> <!-- col.// -->
+
+        <main class="col-md-9">
+
+            <div class="table-responsive">
+              <table class="table table-striped" id="table-items">
+                <thead>
+                  <tr>
+                    <th class="text-center">#</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th>Available</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for item in items %}
+                    <tr>
+                      <td><a href="{{ url_for('web_admin_items.item_edit', id=item.id) }}">{{ item.id }}</a></td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.description | truncate(length=50) }}</td>
+                    <td>{{ "${:,.2f}".format(item.price) }}</td>
+                    <td>{{ item.category }}</td>
+                    <td>{{ item.available }}</td>
+                    <td class="align-center">
+                      <a href="{{ url_for('web_admin_items.item_edit', id=item.id) }}"><div class="fas fa-pencil-alt action-icon"></div></a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+
+        </main> <!-- col.// -->
+
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{{ url_for('static', filename='plugins/datatables/datatables.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='plugins/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin/items.js') }}"></script>
+{%  endblock %}

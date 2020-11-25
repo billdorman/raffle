@@ -22,13 +22,18 @@ class ItemImage(db.Model):
         if image_data is None:
             image_data = {}
 
-        self.path = image_data.get("s3_bucket_path", self.s3_bucket_path)
+        self.path = image_data.get("path", self.path)
         self.created_by = image_data.get("created_by", self.created_by)
         self.created_at = image_data.get("created_at", self.created_at)
         self.updated_at = image_data.get("updated_at", self.updated_at)
         db.session.add(self)
         db.session.commit()
         return self
+
+    def delete(self):
+        log.info("Preparing to delete item image")
+        db.session.delete(self)
+        db.session.commit()
 
 
 class ItemImageSchema(ma.Schema):

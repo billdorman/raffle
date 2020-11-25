@@ -13,27 +13,47 @@
 {% block body %}
     <div class="row">
         <aside class="col-md-3">
-        <div class="card">
-        <article class="filter-group">
-            <header class="card-header">
-                <a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
-                    <i class="icon-control fa fa-chevron-down"></i>
-                    <h6 class="title">Categories</h6>
-                </a>
-            </header>
-            <div class="filter-content collapse show" id="collapse_1" style="">
-                <div class="card-body">
-                    <ul class="list-menu">
-                        <li><a href="/">All</a></li>
-                        <li><a href="/?category=electronics">Electronics</a></li>
-                        <li><a href="/?category=apparel">Apparel</a></li>
-                        <li><a href="/?category=outdoor">Outdoor</a></li>
-                    </ul>
+            {% if current_user.role == 'administrator' %}
+                <div class="card mb-2">
+                    <article class="filter-group">
+                        <header class="card-header">
+                            <a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
+                                <i class="icon-control fa fa-chevron-down"></i>
+                                <h6 class="title">Admin</h6>
+                            </a>
+                        </header>
+                        <div class="filter-content collapse show" id="collapse_1" style="">
+                            <div class="card-body">
+                                <ul class="list-menu">
+                                    <li><a href="{{ url_for('web_admin_items.items_get') }}">Manage Items</a></li>
+                                </ul>
 
-                </div> <!-- card-body.// -->
-            </div>
-        </article> <!-- filter-group  .// -->
-    </div> <!-- card.// -->
+                            </div> <!-- card-body.// -->
+                        </div>
+                    </article> <!-- filter-group  .// -->
+                </div> <!-- card.// -->
+            {% endif %}
+            <div class="card">
+                <article class="filter-group">
+                    <header class="card-header">
+                        <a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
+                            <i class="icon-control fa fa-chevron-down"></i>
+                            <h6 class="title">Categories</h6>
+                        </a>
+                    </header>
+                    <div class="filter-content collapse show" id="collapse_1" style="">
+                        <div class="card-body">
+                            <ul class="list-menu">
+                                <li><a href="/">All</a></li>
+                                {% for category in categories %}
+                                    <li><a href="/?category={{ category | lower }}">{{ category }}</a></li>
+                                {% endfor %}
+                            </ul>
+
+                        </div> <!-- card-body.// -->
+                    </div>
+                </article> <!-- filter-group  .// -->
+            </div> <!-- card.// -->
         </aside> <!-- col.// -->
 
         <main class="col-md-9">
@@ -41,35 +61,35 @@
             {% for item in items %}
                 <article class="card card-product-list">
                     <div class="row no-gutters">
-                <aside class="col-md-3">
-                    <a href="#" class="img-wrap">
-                        <img src="{{ item.images[0].path }}" style="object-fit: cover; width: 100%">
-                    </a>
-                </aside> <!-- col.// -->
-                <div class="col-md-6">
-                    <div class="info-main">
-                        <a href="#" class="h5 title">{{ item.name }}</a>
-                        <p>{{ item.description }}</p>
-                    </div> <!-- info-main.// -->
-                </div> <!-- col.// -->
-                <aside class="col-sm-3">
-                    <div class="info-aside">
-                        <div class="price-wrap">
-                            <span class="price h5"> {{ "${:,.2f}".format(item.price) }} </span>
-                        </div> <!-- info-price-detail // -->
-                        <p class="text-info">per ticket</p>
-                        <br>
-                        <p>
-                            <a href="#" class="btn btn-primary btn-block">
-                                <span>{{ item_tickets[item.id] }}</span> Purchased
+                        <aside class="col-md-3">
+                            <a href="#" class="img-wrap">
+                                <img src="{{ item.images[0].path }}" style="object-fit: cover; width: 100%">
                             </a>
-                            <div class="input-spinner-container">
-                                <input placeholder="Tickets" data-id="{{ item.id }}" required type="number" value="" min="0" max="100" class="input-spinner"/>
-                            </div>
-                        </p>
-                    </div> <!-- info-aside.// -->
-                </aside> <!-- col.// -->
-            </div> <!-- row.// -->
+                        </aside> <!-- col.// -->
+                        <div class="col-md-6">
+                            <div class="info-main">
+                                <a href="#" class="h5 title">{{ item.name }}</a>
+                                <p>{{ item.description }}</p>
+                            </div> <!-- info-main.// -->
+                        </div> <!-- col.// -->
+                        <aside class="col-sm-3">
+                            <div class="info-aside">
+                                <div class="price-wrap">
+                                    <span class="price h5"> {{ "${:,.2f}".format(item.price) }} </span>
+                                </div> <!-- info-price-detail // -->
+                                <p class="text-info">per ticket</p>
+                                <br>
+                                <p>
+                                    <a href="#" class="btn btn-primary btn-block">
+                                        <span>{{ item_tickets[item.id] }}</span> Purchased
+                                    </a>
+                                <div class="input-spinner-container">
+                                    <input placeholder="Tickets" data-id="{{ item.id }}" required type="number" value="" min="0" max="100" class="input-spinner"/>
+                                </div>
+                                </p>
+                            </div> <!-- info-aside.// -->
+                        </aside> <!-- col.// -->
+                    </div> <!-- row.// -->
                 </article> <!-- card-product .// -->
             {% endfor %}
 

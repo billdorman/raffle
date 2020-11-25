@@ -22,7 +22,7 @@ class User(UserMixin, db.Model):
     phone = db.Column(db.String(25))
     email = db.Column(db.String(50))
     password = db.Column(db.String(255))
-    active = db.Column(db.Boolean, default=False)
+    active = db.Column(db.Boolean, default=True)
     comments = db.Column(db.String(500))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
