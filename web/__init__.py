@@ -3,4 +3,4 @@ from web.items import web_items
 from web.search import web_search
 from web.checkout import web_checkout
 from web.admin.items import web_admin_items
-from web.admin.drawing import web_drawing
+from web.web_drawing import web_drawing
