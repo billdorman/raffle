@@ -107,16 +107,13 @@ def item_image_upload(id):
     unique_id = str(uuid.uuid4())
     filename = f'{ unique_id }.{ extension }'
 
-    # Make any missing directories
-    os.makedirs(os.path.join("static", "images", "items", id))
-
     # Save the file to /static/images/items/{item_id}
-    file.save(os.path.join("static", "images", "items", id, filename))
+    file.save(os.path.join("static", "images", "items", filename))
 
     # Create a database record
     image = ItemImage()
     image.item_id = id
-    image.path = f"static/images/items/{id}/{filename}"
+    image.path = f"static/images/items/{filename}"
     image.created_by = current_user.id
     image.update()
 
