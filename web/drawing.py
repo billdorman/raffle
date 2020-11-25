@@ -8,14 +8,14 @@ import logging
 import boto3
 
 log = logging.getLogger()
-drawing = Blueprint('drawing', __name__)
+web_drawing = Blueprint('web_drawing', __name__)
 
-@drawing.context_processor
+@web_drawing.context_processor
 def inject_globals():
     return dict(user=current_user)
 
 # Route used to initiate a drawing for an item.
-@drawing.route("<item_id>", methods=["GET"])
+@web_drawing.route("<item_id>", methods=["GET"])
 @login_required
 def ticket_get(item_id):
     log.info(f"{user} access the drawing page.")
