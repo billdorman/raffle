@@ -38,6 +38,10 @@ class Item(db.Model):
         db.session.commit()
         return self
 
+    def delete(self):
+        log.info("Preparing to delete item")
+        db.session.delete(self)
+        db.session.commit()
 
 class ItemSchema(ma.Schema):
 

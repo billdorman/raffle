@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, jsonify, request
+from flask import Blueprint, render_template, jsonify, request, redirect, url_for
 from flask_login import login_required, current_user
 from models.item import Item
 from models.item_image import ItemImage, ItemImageSchema
@@ -28,7 +28,7 @@ def items_get():
     return render_template('admin/items.html', items=items)
 
 
-# Route used to display the items page
+# Route used to display the item edit page
 @web_admin_items.route("<id>/edit", methods=['GET'])
 @login_required
 def item_edit(id):
@@ -38,6 +38,21 @@ def item_edit(id):
 
     return render_template('admin/item-edit.html', item=item, categories=CONSTANTS.ITEM_CATEGORIES)
 
+
+# Route used to display the new item page
+@web_admin_items.route("/new", methods=['GET'])
+@login_required
+def item_new():
+    log.info("web_admin_items.item_new")
+
+    item = Item()
+    item.name = "New Item"
+    item.description = ""
+    item.price = 1
+    item.created_by = current_user.id
+    item.update()
+
+    return redirect(url_for('web_admin_items.item_edit', id=item.id))
 
 # Route used to edit a user
 @web_admin_items.route("/<id>/edit", methods=['POST'])
@@ -59,6 +74,20 @@ def edit_page(id):
     # Return the item list page
     items = Item.query.all()
     return render_template('admin/items.html', items=items)
+
+
+# Route used to delete the specified item
+@web_admin_items.route("<id>/delete", methods=['GET'])
+@login_required
+def item_delete(id):
+    log.info("web_admin_items.item_delete")
+    item = Item.query.get(id)
+
+    # Remove the database record
+    item.delete()
+
+    # Load the item list page
+    return redirect(url_for('web_admin_items.items_get'))
 
 
 # Route used to upload an item image
