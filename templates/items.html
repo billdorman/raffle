@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 
 {% block css %}
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css">
     <link href="{{ url_for('static', filename='css/items.css') }}" rel="stylesheet" type="text/css"/>
 {% endblock %}
 
@@ -64,7 +65,11 @@
                     <div class="row no-gutters">
                         <aside class="col-md-3">
                             <a href="#" class="img-wrap">
-                                <img src="{{ item.images[0].path }}" style="object-fit: cover; width: 100%">
+                                {% if item.images | length > 0 %}
+                                    <img src="{{ item.images[0].path }}" style="object-fit: cover; width: 100%">
+                                {% else %}
+                                    <img src="/static/images/items/blank.png" style="object-fit: cover; width: 100%">
+                                {% endif %}
                             </a>
                         </aside> <!-- col.// -->
                         <div class="col-md-6">
@@ -81,7 +86,7 @@
                                 <p class="text-info">per ticket</p>
                                 <br>
                                 <p>
-                                    <a href="#" class="btn btn-primary btn-block">
+                                    <a href="#ticketModal" class="btn btn-primary btn-block tickets-button">
                                         <span>{{ item_tickets[item.id] }}</span> Purchased
                                     </a>
                                 <div class="input-spinner-container">
@@ -97,9 +102,22 @@
         </main> <!-- col.// -->
 
     </div>
+
+    <!--DEMO01-->
+    <div id="ticketModal">
+        <!--THIS IS IMPORTANT! to close the modal, the class name has to match the name given on the ID  class="close-animatedModal" -->
+        <div class="close-ticketModal">
+            CLOSE MODAL
+        </div>
+
+        <div class="modal-content">
+                  <!--Your modal content goes here-->
+        </div>
+    </div>
 {% endblock %}
 
 {% block javascript %}
     <script src="{{ url_for('static', filename='plugins/input-spinner/bootstrap-input-spinner.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='plugins/animated-modal/animatedModal.min.js') }}" type="text/javascript"></script>
     <script src="{{ url_for('static', filename='js/items.js') }}" type="text/javascript"></script>
 {%  endblock %}
