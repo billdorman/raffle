@@ -6,6 +6,11 @@ SERVER_NAME = "RAFFLE_SERVER_01"
 
 BASE_URL = "https://sweenypto.org"
 
+# Email Config - Mailgun
+
+EMAIL_API_URL = os.environ.get('EMAIL_API_URL')
+EMAIL_API_KEY = os.environ.get('EMAIL_API_KEY')
+
 # Database
 DB_ENGINE = 'mysql+pymysql'
 
