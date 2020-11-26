@@ -58,7 +58,7 @@ def drawing_post(id):
     winning_ticket.is_winner = True
     winning_ticket.update()
 
-    if winning_ticket.id == CONSTANTS.GLOBAL_TICKET_ID.id:
+    if winning_ticket.id == CONSTANTS.GLOBAL_TICKET_ID:
         winning_ticket.active = True
         winning_ticket.update()
 
