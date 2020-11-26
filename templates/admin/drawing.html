@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block css %}
+    <link href="{{ url_for('static', filename='plugins/raffle/css/raffle.css') }}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block title %}Drawing - {{ item.name }}{% endblock %}
+
+{#{% block breadcrumbs %}#}
+{#    <li class="breadcrumb-item"><a href="{{ url_for('web_items.items_get') }}">Home</a></li>#}
+{#    <li class="breadcrumb-item"><a href="javascript:void(0);">Items</a></li>#}
+{#{% endblock %}#}
+
+{% block body %}
+    <div class="row">
+
+
+{#        <div id="drumHolder" class="drumHolder fitImg">#}
+{#            <img src="raffledrumanimation/assets/stand.svg"/>#}
+{##}
+{#            <!-- RAFFLE HOLDER-->#}
+{#            <div class="raffleHolder">#}
+{#                <img src="raffledrumanimation/assets/glass.svg"/>#}
+{##}
+{#                <!-- TICKET RESULT-->#}
+{#                <div class="ticketResult"></div>#}
+{##}
+{#                <div class="drumMask">#}
+{#                	<!-- DRUM ITEMS-->#}
+{#                    <div class="itemsWrapper"></div>#}
+{##}
+{#                    <!-- DRUM TOP-->#}
+{#                    <div class="drumGlassHolder">#}
+{#                        <img src="raffledrumanimation/assets/glass.svg"/>#}
+{#                    </div>#}
+{##}
+{#                    <!-- DRUM SIDE-->#}
+{#                    <div class="drumSideHolder">#}
+{#                        <div class="side"><img src="{{ url_for('static', filename='images/ticket.png') }}"/></div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+
+        <form method="post">
+            <div>
+                <button type="submit" class="btn-primary btn-lg">Draw A Ticket</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{{ url_for('static', filename='plugins/raffle/js/raffle.js') }}" type="text/javascript"></script>
+{%  endblock %}

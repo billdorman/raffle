@@ -5,6 +5,9 @@ import os
 SERVER_NAME = "RAFFLE_SERVER_01"
 BASE_URL = "https://sweenypto.org"
 
+# Global Ticket
+GLOBAL_TICKET_ID = 1
+
 # Email Config - Mailgun
 EMAIL_API_URL = os.environ.get('EMAIL_API_URL')
 EMAIL_API_KEY = os.environ.get('EMAIL_API_KEY')

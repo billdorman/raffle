@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block title %}Drawing - {{ item.name }}{% endblock %}
+
+{#{% block breadcrumbs %}#}
+{#    <li class="breadcrumb-item"><a href="{{ url_for('web_items.items_get') }}">Home</a></li>#}
+{#    <li class="breadcrumb-item"><a href="javascript:void(0);">Items</a></li>#}
+{#{% endblock %}#}
+
+{% block body %}
+    <div class="row">
+        <div class="text-center">
+            <h1>Congratulations {{ winning_user.first_name }} {{ winning_user.last_name }}!</h1>
+            <h4>You just won a {{ item.name }} with lucky ticket number {{ 100000 + winning_ticket.id }}</h4>
+            <h4>Your odds of winning were {{ tickets_purchased }} in {{ total_tickets }}</h4>
+
+            <form method="post" action="{{ url_for('web_admin_drawings.drawing_post', id=item.id) }}">
+                <div>
+                    <button type="submit" class="btn-primary btn-lg">Draw Again</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+
+{%  endblock %}

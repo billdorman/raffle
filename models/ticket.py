@@ -16,6 +16,7 @@ class Ticket(db.Model):
     item_id = db.Column(db.Integer, db.ForeignKey('items.id'))
     order_id = db.Column(db.Integer, db.ForeignKey('orders.id'))
     active = db.Column(db.Boolean, default=False)
+    is_winner = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     item = db.relationship('Item')
@@ -30,6 +31,7 @@ class Ticket(db.Model):
         self.item_id = ticket_data.get("item_id", self.item_id)
         self.order_id = ticket_data.get("order_id", self.order_id)
         self.active = ticket_data.get("active", self.active)
+        self.is_winner = ticket_data.get("is_winner", self.is_winner)
         self.created_at = ticket_data.get("created_at", self.created_at)
         self.updated_at = ticket_data.get("updated_at", self.updated_at)
         db.session.add(self)
@@ -48,6 +50,8 @@ class TicketSchema(ma.Schema):
     order_id = fields.Integer()
 
     active = fields.Boolean()
+
+    is_winner = fields.Boolean()
 
     created_at = fields.String(allow_none=True)
 

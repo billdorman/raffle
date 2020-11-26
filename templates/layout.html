@@ -95,6 +95,11 @@
         {% block breadcrumbs %}{% endblock %}
 	    <li class="breadcrumb-item"><a href="{{ url_for('web_items.items_get') }}">Home</a></li>
 	    <li class="breadcrumb-item"><a href="{{ url_for('web_tickets.tickets_get') }}">Tickets</a></li>
+
+        {% if current_user.role == 'administrator' %}
+            <li class="breadcrumb-item"><a href="{{ url_for('web_admin_items.item_new') }}">New Item</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('web_admin_items.items_get') }}">Manage Items</a></li>
+        {% endif %}
 	</ol>  
 	</nav>
 </div> <!-- container //  -->

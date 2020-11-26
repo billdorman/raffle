@@ -8,7 +8,7 @@ from web import web_items
 from web import web_search
 from web import web_checkout
 from web import web_admin_items
-from web import drawing
+from web import web_admin_drawings
 from web import web_tickets
 import logging
 
@@ -72,7 +72,7 @@ def register_blueprints(application):
     application.register_blueprint(web_search, url_prefix='/search')
     application.register_blueprint(web_checkout, url_prefix='/checkout')
     application.register_blueprint(web_admin_items, url_prefix='/admin/items')
-    application.register_blueprint(drawing, url_prefix='/admin/drawing')
+    application.register_blueprint(web_admin_drawings, url_prefix='/admin/drawings')
     application.register_blueprint(web_tickets, url_prefix='/tickets')
 
 

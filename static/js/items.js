@@ -1,7 +1,5 @@
 $(document).ready(function() {
 
-  $(".tickets-button").animatedModal();
-
   // Check to see if checkout_complete was passed in as a query param. If so, clear our cart from local storage
   // and display a success message
   const queryString = window.location.search;

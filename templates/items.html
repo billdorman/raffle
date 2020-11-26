@@ -86,7 +86,7 @@
                                 <p class="text-info">per ticket</p>
                                 <br>
                                 <p>
-                                    <a href="#ticketModal" class="btn btn-primary btn-block tickets-button">
+                                    <a href="#" class="btn btn-primary btn-block tickets-button">
                                         <span>{{ item_tickets[item.id] }}</span> Purchased
                                     </a>
                                 <div class="input-spinner-container">
@@ -102,22 +102,9 @@
         </main> <!-- col.// -->
 
     </div>
-
-    <!--DEMO01-->
-    <div id="ticketModal">
-        <!--THIS IS IMPORTANT! to close the modal, the class name has to match the name given on the ID  class="close-animatedModal" -->
-        <div class="close-ticketModal">
-            CLOSE MODAL
-        </div>
-
-        <div class="modal-content">
-                  <!--Your modal content goes here-->
-        </div>
-    </div>
 {% endblock %}
 
 {% block javascript %}
     <script src="{{ url_for('static', filename='plugins/input-spinner/bootstrap-input-spinner.js') }}" type="text/javascript"></script>
-    <script src="{{ url_for('static', filename='plugins/animated-modal/animatedModal.min.js') }}" type="text/javascript"></script>
     <script src="{{ url_for('static', filename='js/items.js') }}" type="text/javascript"></script>
 {%  endblock %}
