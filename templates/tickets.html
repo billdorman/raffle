@@ -14,29 +14,7 @@
 
 {% block body %}
     <div class="row">
-        <aside class="col-md-3">
-            <div class="card mb-2">
-                <article class="filter-group">
-                    <header class="card-header">
-                        <a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
-                            <i class="icon-control fa fa-chevron-down"></i>
-                            <h6 class="title">Admin</h6>
-                        </a>
-                    </header>
-                    <div class="filter-content collapse show" id="collapse_1" style="">
-                        <div class="card-body">
-                            <ul class="list-menu">
-                                <li><a href="{{ url_for('web_admin_items.item_new') }}">New Item</a></li>
-                                <li><a href="{{ url_for('web_admin_items.items_get') }}">Manage Items</a></li>
-                            </ul>
-
-                        </div> <!-- card-body.// -->
-                    </div>
-                </article> <!-- filter-group  .// -->
-            </div> <!-- card.// -->
-        </aside> <!-- col.// -->
-
-        <main class="col-md-9">
+        <main class="col-tickets">
 
             <div class="table-responsive">
                 <table class="table table-striped" id="table-tickets">
