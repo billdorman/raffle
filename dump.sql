@@ -91,6 +91,7 @@ create table tickets
 	item_id int null,
 	order_id int null,
 	active tinyint(1) null,
+	is_winner tinyint(1),
 	created_at datetime null,
 	updated_at datetime null,
 	constraint tickets_id_uindex
