@@ -53,11 +53,14 @@ def drawing_post(id):
     item.available = False
     item.update()
 
-    # Mark the winning ticket as inactive
-    winning_ticket.active = False
+    # Mark the winning ticket as a winner.
     winning_ticket.is_winner = True
     winning_ticket.update()
-
+    
+    # Do not mark global tickets as inactive but deactivate non-global tickets.
+    if winning_ticket.id != CONSTANTS.GLOBAL_TICKET_ID:
+        winning_ticket.active = False
+        winning_ticket.update()
 
     return render_template('admin/drawing-winner.html',
                            item=item,
