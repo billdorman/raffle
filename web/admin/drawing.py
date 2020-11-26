@@ -1,8 +1,8 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, jsonify
 from flask_login import login_required, current_user
-from models.item import Item
-from models.ticket import Ticket
-from models.user import User
+from models.item import Item, ItemSchema
+from models.ticket import Ticket, TicketSchema
+from models.user import User, UserSchema
 from config import const as CONSTANTS
 import logging
 import random
@@ -31,17 +31,29 @@ def drawing_get(id):
 # Route used to perform the actual drawing for an item
 @web_admin_drawings.route("<id>", methods=['POST'])
 @login_required
-def drawing_post(id):
-    log.info("web_admin_drawings.drawing_post")
+def drawing_post_ajax(id):
+    log.info("web_admin_drawings.drawing_post_ajax")
+    ticket_schema = TicketSchema()
+    item_schema = ItemSchema()
+    user_schema = UserSchema()
+
     item = Item.query.get(id)
     tickets = Ticket.query.filter(Ticket.item_id.in_((item.id, CONSTANTS.GLOBAL_TICKET_ID)), Ticket.active == True).all()
 
     # Make sure that the item is still available
     if item.available is False:
-        return render_template('admin/drawing-unavailable.html', item=item)
+        res = {
+            "success": False,
+            "error_message": "Item no longer available",
+        }
+        return jsonify(res)
 
     if len(tickets) < 1:
-        return render_template('admin/drawing-empty.html', item=item)
+        res = {
+            "success": False,
+            "error_message": "No active tickets for the item",
+        }
+        return jsonify(res)
 
     winning_ticket = random.choice(tickets)
 
@@ -62,10 +74,14 @@ def drawing_post(id):
         winning_ticket.active = True
         winning_ticket.update()
 
+    res = {
+        "winning_user": user_schema.dump(winning_user),
+        "winning_ticket": ticket_schema.dump(winning_ticket),
+        "item": item_schema.dump(item),
+        "stats": {
+            "total_tickets": len(tickets),
+            "tickets_purchased": winning_user_tickets_purchased
+        }
+    }
 
-    return render_template('admin/drawing-winner.html',
-                           item=item,
-                           winning_ticket=winning_ticket,
-                           winning_user=winning_user,
-                           total_tickets=len(tickets),
-                           tickets_purchased=winning_user_tickets_purchased)
+    return jsonify(res)

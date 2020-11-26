@@ -44,15 +44,13 @@
                     </div>
                 </div>
             </div>
+
+            <button onclick="spin()" class="btn-primary btn-lg mt-3">Draw A Ticket</button>
         </div>
 
-        <h3 onclick="spin()">Spin</h3>
 
-        <form method="post">
-            <div>
-                <button type="submit" class="btn-primary btn-lg">Draw A Ticket</button>
-            </div>
-        </form>
+
+
     </div>
     </div>
 
@@ -67,7 +65,9 @@
             </button>
           </div>
           <div class="modal-body">
-            <h1>No One!</h1>
+            <h4 id="winnerName"></h4>
+            <h6 id="winnerInfo"></h6>
+            <h6 id="winnerStats"></h6>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -91,12 +91,28 @@
                   callback: raffleCallback
                 }
             );
+
+             $("#modalWinner").on('hide.bs.modal', function(){
+              window.location = `{{ url_for('web_admin_items.items_get') }}`;
+            });
         });
 
         function spin() {
           $('#drawing').raffleDrumAnimation('toggleSpin');
           setTimeout(() => {
-            $('#drawing').raffleDrumAnimation('result');
+            $.post(`{{ url_for('web_admin_drawings.drawing_post_ajax', id=item.id)}}`)
+            .done(data => {
+              $('#winnerName').html(`Congratulations ${data.winning_user.first_name} ${data.winning_user.last_name}!`);
+              $('#winnerInfo').html(`You just won a ${data.item.name} with lucky ticket number ${100000 + data.winning_ticket.id}`);
+              $('#winnerStats').html(`Your odds of winning were ${data.stats.tickets_purchased} in ${data.stats.total_tickets}`);
+            })
+            .fail(error => {
+              alert("Error drawing ticket. Please try again later.");
+            })
+            .always(() => {
+              $('#drawing').raffleDrumAnimation('result');
+            })
+
           }, 3000)
         }
 
@@ -104,26 +120,12 @@
             switch(data.status) {
               case 'spinstart':
                 //when drum start raffle
-
                 break;
-
               case 'spinstop':
                 //when drum stop raffle
-
                 break;
-
               case 'result':
-
-                //when drum start show result
-
-                //you can replace your result number in here
-                //$('#'+data.id+' .ticketResult .item .displayNumber').html(10);
-
-                //or you can replace your result content in here
-                //$('#'+data.id+' .ticketResult .item').html('<div>my result</div');
-
                 break;
-
               case 'resultcomplete':
                 //when drum show result complete
                 $("#modalWinner").modal();
