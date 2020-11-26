@@ -36,6 +36,10 @@ def drawing_post(id):
     item = Item.query.get(id)
     tickets = Ticket.query.filter(Ticket.item_id.in_((item.id, CONSTANTS.GLOBAL_TICKET_ID)), Ticket.active == True).all()
 
+    # Make sure that the item is still available
+    if item.available is False:
+        return render_template('admin/drawing-unavailable.html', item=item)
+
     if len(tickets) < 1:
         return render_template('admin/drawing-empty.html', item=item)
 
@@ -44,6 +48,10 @@ def drawing_post(id):
     winning_user = User.query.get(winning_ticket.user_id)
 
     winning_user_tickets_purchased = sum(1 for t in tickets if t.user_id == winning_user.id)
+
+    # Mark the item as being unavailable
+    item.available = False
+    item.update()
 
     # Mark the winning ticket as inactive
     winning_ticket.active = False

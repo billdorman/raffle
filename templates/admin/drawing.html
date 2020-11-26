@@ -12,35 +12,41 @@
 {#{% endblock %}#}
 
 {% block body %}
-    <div class="row">
+    <div class="col-lg-6 offset-lg-3">
+        <div class="row">
 
 
-{#        <div id="drumHolder" class="drumHolder fitImg">#}
-{#            <img src="raffledrumanimation/assets/stand.svg"/>#}
-{##}
-{#            <!-- RAFFLE HOLDER-->#}
-{#            <div class="raffleHolder">#}
-{#                <img src="raffledrumanimation/assets/glass.svg"/>#}
-{##}
-{#                <!-- TICKET RESULT-->#}
-{#                <div class="ticketResult"></div>#}
-{##}
-{#                <div class="drumMask">#}
-{#                	<!-- DRUM ITEMS-->#}
-{#                    <div class="itemsWrapper"></div>#}
-{##}
-{#                    <!-- DRUM TOP-->#}
-{#                    <div class="drumGlassHolder">#}
-{#                        <img src="raffledrumanimation/assets/glass.svg"/>#}
-{#                    </div>#}
-{##}
-{#                    <!-- DRUM SIDE-->#}
-{#                    <div class="drumSideHolder">#}
-{#                        <div class="side"><img src="{{ url_for('static', filename='images/ticket.png') }}"/></div>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
+        <div id="drawing" class="drumHolder fitImg">
+            <img src="{{ url_for('static', filename='plugins/raffle/assets/stand.svg') }}"/>
+
+            <!-- RAFFLE HOLDER-->
+            <div class="raffleHolder">
+                <img src="{{ url_for('static', filename='plugins/raffle/assets/glass.svg') }}"/>
+
+                <!-- TICKET RESULT-->
+                <div class="ticketResult"></div>
+
+                <div class="drumMask">
+                	<!-- DRUM ITEMS-->
+                    <div class="itemsWrapper"></div>
+
+                    <!-- DRUM TOP-->
+                    <div class="drumGlassHolder">
+                        <img src="{{ url_for('static', filename='plugins/raffle/assets/glass.svg') }}"/>
+                    </div>
+
+                    <!-- DRUM SIDE-->
+                    <div class="drumSideHolder">
+                        <img src="{{ url_for('static', filename='plugins/raffle/assets/side.svg') }}"/>
+                        <img src="{{ url_for('static', filename='plugins/raffle/assets/side.svg') }}"/>
+                        <img src="{{ url_for('static', filename='plugins/raffle/assets/side.svg') }}"/>
+                        <img src="{{ url_for('static', filename='plugins/raffle/assets/side.svg') }}"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3 onclick="spin()">Spin</h3>
 
         <form method="post">
             <div>
@@ -48,8 +54,84 @@
             </div>
         </form>
     </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalWinner" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">And The Winner Is</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <h1>No One!</h1>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
 {% endblock %}
 
 {% block javascript %}
     <script src="{{ url_for('static', filename='plugins/raffle/js/raffle.js') }}" type="text/javascript"></script>
+
+    <script>
+        $(document).ready(function(){
+             $('#drawing').raffleDrumAnimation(
+                {
+                    itemImage:["{{ url_for('static', filename='images/raffle-logo.png') }}"],
+                    itemRow:7,
+                    itemColumn:5,
+                  callback: raffleCallback
+                }
+            );
+        });
+
+        function spin() {
+          $('#drawing').raffleDrumAnimation('toggleSpin');
+          setTimeout(() => {
+            $('#drawing').raffleDrumAnimation('result');
+          }, 3000)
+        }
+
+        function raffleCallback(data){
+            switch(data.status) {
+              case 'spinstart':
+                //when drum start raffle
+
+                break;
+
+              case 'spinstop':
+                //when drum stop raffle
+
+                break;
+
+              case 'result':
+
+                //when drum start show result
+
+                //you can replace your result number in here
+                //$('#'+data.id+' .ticketResult .item .displayNumber').html(10);
+
+                //or you can replace your result content in here
+                //$('#'+data.id+' .ticketResult .item').html('<div>my result</div');
+
+                break;
+
+              case 'resultcomplete':
+                //when drum show result complete
+                $("#modalWinner").modal();
+                break;
+
+              default:
+
+            }
+        }
+    </script>
 {%  endblock %}

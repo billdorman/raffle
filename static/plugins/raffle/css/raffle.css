@@ -1,0 +1,19 @@
+.drumHolder{ position:relative; width:100%; margin-top:50px; }
+.drumHolder .raffleHolder{ position:absolute; top:2%; left:1%; width:98%; }
+.drumHolder .drumMask{ width:100%; height:100%; position:absolute; overflow:hidden; top:0; left:0 }
+.drumHolder .drumGlassHolder{ position:absolute; width:100%; height:100%; top:0; left:0; z-index:100; }
+.drumHolder .drumSideHolder { position:absolute; width:100%; height:100%; top:0; left:0; z-index:100; }
+.drumHolder .drumSideHolder .side{ position:absolute; width:100%; top:20%; }
+
+.drumHolder .itemsWrapper { position:absolute; width:100%; height:100%; left:0; }
+.drumHolder .itemsWrapper .items{ position:absolute; width:100%; height:100%; top:0; left:0; }
+.drumHolder .ticketResult{ position:absolute; top:0; left:0; width:100%; height:100%; }
+.drumHolder .ticketResult .item, .drumHolder .itemsWrapper .item{ position:absolute; }
+
+.drumHolder .displayNumber{ position:absolute; width:100%; height:100%; top:0; left:0; padding-top:35%; font-family:Verdana, Geneva, sans-serif; font-size:2vw; line-height:2vw; font-weight:bold; text-align:center; color:#666; }
+
+.drumHolder.fitImg img{ width:100%; height:auto; display:block; }
+
+@media only screen and (min-width: 800px) {
+	.drumHolder .displayNumber{ font-size:25px; }
+}

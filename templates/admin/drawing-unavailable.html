@@ -14,9 +14,7 @@
 {% block body %}
     <div class="row">
         <div class="text-center">
-            <h1>Congratulations {{ winning_user.first_name }} {{ winning_user.last_name }}!</h1>
-            <h4>You just won a {{ item.name }} with lucky ticket number {{ 100000 + winning_ticket.id }}</h4>
-            <h4>Your odds of winning were {{ tickets_purchased }} in {{ total_tickets }}</h4>
+            <h4>Hmm. Looks like {{ item.name }} is no longer available.</h4>
         </div>
     </div>
 {% endblock %}
