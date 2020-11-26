@@ -47,7 +47,7 @@ LOGGING_LEVEL = 'DEBUG'
 
 STATE_ABBREVIATIONS = ['NA', 'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY']
 
-ITEM_CATEGORIES = ['Electronics', 'Apparel', 'Outdoor']
+ITEM_CATEGORIES = ['General', 'Electronics', 'Apparel', 'Outdoor']
 
 # Square Payment Processing Variables
 SQUARE_APP_ID = os.environ.get('RAFFLE_SQUARE_APP_ID')
