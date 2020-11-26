@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='plugins/datatables/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='plugins/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css') }}">
+{% endblock %}
+
+{% block title %}Purchased Tickets{% endblock %}
+
+{#{% block breadcrumbs %}#}
+{#    <li class="breadcrumb-item"><a href="{{ url_for('web_items.items_get') }}">Home</a></li>#}
+{#    <li class="breadcrumb-item"><a href="javascript:void(0);">Tickets</a></li>#}
+{#{% endblock %}#}
+
+{% block body %}
+    <div class="row">
+        <aside class="col-md-3">
+            <div class="card mb-2">
+                <article class="filter-group">
+                    <header class="card-header">
+                        <a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
+                            <i class="icon-control fa fa-chevron-down"></i>
+                            <h6 class="title">Admin</h6>
+                        </a>
+                    </header>
+                    <div class="filter-content collapse show" id="collapse_1" style="">
+                        <div class="card-body">
+                            <ul class="list-menu">
+                                <li><a href="{{ url_for('web_admin_items.item_new') }}">New Item</a></li>
+                                <li><a href="{{ url_for('web_admin_items.items_get') }}">Manage Items</a></li>
+                            </ul>
+
+                        </div> <!-- card-body.// -->
+                    </div>
+                </article> <!-- filter-group  .// -->
+            </div> <!-- card.// -->
+        </aside> <!-- col.// -->
+
+        <main class="col-md-9">
+
+            <div class="table-responsive">
+                <table class="table table-striped" id="table-tickets">
+                    <thead>
+                    <tr>
+                        <th>Ticket #</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Purchased On</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for ticket in tickets %}
+                        <tr>
+                            <td>{{ 100000 + ticket.id }}</td>
+                            <td>{{ ticket.item.name }}</td>
+                            <td>{{ ticket.item.category | title }}</td>
+                            <td>{{ "${:,.2f}".format(ticket.item.price) }}</td>
+                            <td>{{ ticket.created_at.strftime('%Y-%m-%d') }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </main> <!-- col.// -->
+
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{{ url_for('static', filename='plugins/datatables/datatables.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='plugins/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tickets.js') }}"></script>
+{%  endblock %}

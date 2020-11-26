@@ -1,8 +1,8 @@
 from extensions import db, ma
 from datetime import datetime
-from marshmallow import fields, post_load, validate
-from flask_login import UserMixin
+from marshmallow import fields, post_load
 from models.item_image import ItemImageSchema
+from models.item import Item, ItemSchema
 import logging
 
 log = logging.getLogger()
@@ -18,6 +18,8 @@ class Ticket(db.Model):
     active = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    item = db.relationship('Item')
+
 
     def update(self, ticket_data=None):
         log.info("Preparing to update ticket")
@@ -52,6 +54,8 @@ class TicketSchema(ma.Schema):
     updated_at = fields.String(allow_none=True)
 
     images = fields.Nested(ItemImageSchema, many=True)
+
+    item = fields.Nested(ItemSchema)
 
     @post_load
     def make_ticket(self, data, **kwargs):

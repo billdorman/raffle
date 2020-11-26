@@ -8,11 +8,12 @@
 
 {% block title %}{{ item.name }}{% endblock %}
 
-{% block breadcrumbs %}
-    <li class="breadcrumb-item"><a href="{{ url_for('web_items.items_get') }}">Home</a></li>
-    <li class="breadcrumb-item"><a href="{{ url_for('web_admin_items.items_get') }}">Items</a></li>
-    <li class="breadcrumb-item"><a href="javascript:void(0);">{{ item.name }}</a></li>
-{% endblock %}
+
+{#{% block breadcrumbs %}#}
+{#    <li class="breadcrumb-item"><a href="{{ url_for('web_items.items_get') }}">Home</a></li>#}
+{#    <li class="breadcrumb-item"><a href="{{ url_for('web_admin_items.items_get') }}">Items</a></li>#}
+{#    <li class="breadcrumb-item"><a href="javascript:void(0);">{{ item.name }}</a></li>#}
+{#{% endblock %}#}
 
 {% block body %}
     <form method="post">

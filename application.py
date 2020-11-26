@@ -1,7 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
 from extensions import db, ma, jwt, login_manager, scheduler
-from flask_apscheduler import APScheduler
 from config import const as CONSTANTS
 from services import scheduler_service
 from web import web_auth
@@ -10,6 +9,7 @@ from web import web_search
 from web import web_checkout
 from web import web_admin_items
 from web import drawing
+from web import web_tickets
 import logging
 
 log = logging.getLogger()
@@ -73,6 +73,7 @@ def register_blueprints(application):
     application.register_blueprint(web_checkout, url_prefix='/checkout')
     application.register_blueprint(web_admin_items, url_prefix='/admin/items')
     application.register_blueprint(drawing, url_prefix='/admin/drawing')
+    application.register_blueprint(web_tickets, url_prefix='/tickets')
 
 
 log.info("Preparing to call create_app")

@@ -19,6 +19,7 @@
     <!-- custom style -->
     <link href="{{ url_for('static', filename='css/ui.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ url_for('static', filename='css/responsive.css') }}" rel="stylesheet" media="only screen and (max-width: 1200px)" />
+    <link href="{{ url_for('static', filename='css/layout.css') }}" rel="stylesheet" />
     {% block css %}{% endblock %}
 </head>
 <body>
@@ -92,9 +93,8 @@
 	<nav>
 	<ol class="breadcrumb text-white">
         {% block breadcrumbs %}{% endblock %}
-	    <!-- <li class="breadcrumb-item"><a href="#">Home</a></li> -->
-	    <!-- <li class="breadcrumb-item"><a href="#">Best category</a></li> -->
-	    <!-- <li class="breadcrumb-item active" aria-current="page">Great articles</li> -->
+	    <li class="breadcrumb-item"><a href="{{ url_for('web_items.items_get') }}">Home</a></li>
+	    <li class="breadcrumb-item"><a href="{{ url_for('web_tickets.tickets_get') }}">Tickets</a></li>
 	</ol>  
 	</nav>
 </div> <!-- container //  -->
