@@ -85,4 +85,4 @@ register_blueprints(application)
 
 # Start the flask server
 if __name__ == '__main__':
-    application.run(debug=True, use_reloader=False)
+    application.run(debug=True, use_reloader=False, host='0.0.0.0')

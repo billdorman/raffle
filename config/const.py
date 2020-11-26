@@ -3,7 +3,7 @@ import os
 
 # Server Name
 SERVER_NAME = "RAFFLE_SERVER_01"
-BASE_URL = "https://sweenypto.org"
+BASE_URL = "http://localhost:5000"
 
 # Global Ticket
 GLOBAL_TICKET_ID = 1
