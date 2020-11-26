@@ -5,11 +5,14 @@ from models.user import User, UserSchema
 from services.auth_service import sign_in
 from services.crypt_service import pwd_context
 import logging
-
+from services.email_service import send_email
 
 log = logging.getLogger()
 web_auth = Blueprint('web_auth', __name__)
 
+
+message_subject = 'Your new SweenyPTO.org Account'
+message_body = '{first_name}, thank you for registering your new account. Your login name will be {email}.'
 
 # Route used to display the login page
 @web_auth.route("/login", methods=['GET'])
@@ -90,6 +93,8 @@ def register_post():
     except ValidationError as ex:
         return '', 400
 
-    # Valid user, use flask_login to log the user in and redirect to the home page
+      # Valid user, use flask_login to log the user in and redirect to the home page
     login_user(user, True)
     return redirect(url_for('web_items.items_get'))
+    
+    email_service.send_email(email, message_subject, message_body)

@@ -3,17 +3,14 @@ import os
 
 # Server Name
 SERVER_NAME = "RAFFLE_SERVER_01"
-
 BASE_URL = "https://sweenypto.org"
 
 # Email Config - Mailgun
-
 EMAIL_API_URL = os.environ.get('EMAIL_API_URL')
 EMAIL_API_KEY = os.environ.get('EMAIL_API_KEY')
 
 # Database
 DB_ENGINE = 'mysql+pymysql'
-
 DB_SERVER = os.environ.get('RAFFLE_DB_SERVER')
 DB_USER = os.environ.get('RAFFLE_DB_USER')
 DB_PASS = os.environ.get('RAFFLE_DB_PASS')
