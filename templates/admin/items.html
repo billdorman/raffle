@@ -62,7 +62,6 @@
                     <td>{{ item.available }}</td>
                     <td class="align-center">
                       <a href="{{ url_for('web_admin_items.item_edit', id=item.id) }}"><div class="fas fa-pencil-alt action-icon p-2" style="font-size: 1.2em;"></div></a>
-                      <a href="{{ url_for('web_admin_items.item_delete', id=item.id) }}"><div class="fas fa-trash text-danger action-icon p-2" style="font-size: 1.2em;"></div></a>
                     </td>
                   </tr>
                   {% endfor %}

@@ -76,20 +76,6 @@ def edit_page(id):
     return render_template('admin/items.html', items=items)
 
 
-# Route used to delete the specified item
-@web_admin_items.route("<id>/delete", methods=['GET'])
-@login_required
-def item_delete(id):
-    log.info("web_admin_items.item_delete")
-    item = Item.query.get(id)
-
-    # Remove the database record
-    item.delete()
-
-    # Load the item list page
-    return redirect(url_for('web_admin_items.items_get'))
-
-
 # Route used to upload an item image
 @web_admin_items.route("<id>/image", methods=['POST'])
 @login_required

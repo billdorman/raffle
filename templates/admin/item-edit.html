@@ -58,8 +58,8 @@
                                 <div class="form-group">
                                     <label>Available</label>
                                     <select class="form-control" name="available">
-                                        <option value="True" {% if item.available is true %} selected="selected"{% endif %}>Yes</option>
-                                        <option value="False" {% if item.category is false %} selected="selected"{% endif %}>No</option>
+                                        <option value="True" {% if item.available == true %} selected="selected"{% endif %}>Yes</option>
+                                        <option value="False" {% if item.available == false %} selected="selected"{% endif %}>No</option>
                                     </select>
                                 </div>
                             </div>
