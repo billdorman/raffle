@@ -47,6 +47,7 @@
                         <th>Category</th>
                         <th>Price</th>
                         <th>Purchased On</th>
+                        <th>Winner</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -57,6 +58,7 @@
                             <td>{{ ticket.item.category | title }}</td>
                             <td>{{ "${:,.2f}".format(ticket.item.price) }}</td>
                             <td>{{ ticket.created_at.strftime('%Y-%m-%d') }}</td>
+                            <td>{{ "Yes" if ticket.is_winner == true else "No" }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
