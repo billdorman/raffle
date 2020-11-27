@@ -90,6 +90,7 @@ def register_post():
         user = user_schema.load(user_data)
         user.active = True
         user.update()
+        send_email(user)
     except ValidationError as ex:
         return '', 400
 
