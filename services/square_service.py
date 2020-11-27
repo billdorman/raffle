@@ -86,7 +86,7 @@ def get_transaction(order: Order):
         'Content-Type': 'application/json'
     }
 
-    transaction_res = requests.get(f'https://{CONSTANTS.SQUARE_API_URL}}/v2/locations/{CONSTANTS.SQUARE_LOCATION_ID}/transactions/{order.square_transaction_id}', headers=headers)
+    transaction_res = requests.get(f'https://{CONSTANTS.SQUARE_API_URL}/v2/locations/{CONSTANTS.SQUARE_LOCATION_ID}/transactions/{order.square_transaction_id}', headers=headers)
 
     # Get the order ID from the transaction
     if transaction_res.status_code > 300:
