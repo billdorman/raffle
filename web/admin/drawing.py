@@ -70,7 +70,12 @@ def drawing_post_ajax(id):
     winning_ticket.is_winner = True
     winning_ticket.update()
 
-    if winning_ticket.id == CONSTANTS.GLOBAL_TICKET_ID:
+    log.debug(f'Global Ticket Item ID: {CONSTANTS.GLOBAL_TICKET_ID}')
+    log.debug(f'Winning Ticket Item ID: {winning_ticket.item_id}')
+    log.debug(f'Winning Ticket ID: {winning_ticket.id}')
+
+    # Ensure Global Tickets remain active for additional drawings. 
+    if winning_ticket.item_id == CONSTANTS.GLOBAL_TICKET_ID:
         winning_ticket.active = True
         winning_ticket.update()
 
