@@ -5,6 +5,8 @@ import os
 SERVER_NAME = "RAFFLE_SERVER_01"
 BASE_URL = "http://localhost:5000"
 
+SQUARE_API_URL = "connect.squareup.com"
+
 # Global Ticket
 GLOBAL_TICKET_ID = 1
 

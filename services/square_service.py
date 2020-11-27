@@ -58,7 +58,7 @@ def create_transaction(cart, user):
         'Content-Type': 'application/json'
     }
 
-    response = requests.post(f'https://connect.squareupsandbox.com/v2/locations/{CONSTANTS.SQUARE_LOCATION_ID}/checkouts', data=json.dumps(square_order), headers=headers)
+    response = requests.post(f'https://{CONSTANTS.SQUARE_API_URL}/v2/locations/{CONSTANTS.SQUARE_LOCATION_ID}/checkouts', data=json.dumps(square_order), headers=headers)
 
     if response.status_code > 300:
         # Square request failed
@@ -86,7 +86,7 @@ def get_transaction(order: Order):
         'Content-Type': 'application/json'
     }
 
-    transaction_res = requests.get(f'https://connect.squareupsandbox.com/v2/locations/{CONSTANTS.SQUARE_LOCATION_ID}/transactions/{order.square_transaction_id}', headers=headers)
+    transaction_res = requests.get(f'https://{CONSTANTS.SQUARE_API_URL}}/v2/locations/{CONSTANTS.SQUARE_LOCATION_ID}/transactions/{order.square_transaction_id}', headers=headers)
 
     # Get the order ID from the transaction
     if transaction_res.status_code > 300:
@@ -103,7 +103,7 @@ def get_transaction(order: Order):
 
 
     # Get order details
-    order_res = requests.get(f'https://connect.squareupsandbox.com/v2/orders/{order_id}', headers=headers)
+    order_res = requests.get(f'https://{CONSTANTS.SQUARE_API_URL}/v2/orders/{order_id}', headers=headers)
 
     # Get the order details
     if order_res.status_code > 300:
