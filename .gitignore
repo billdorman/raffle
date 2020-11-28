@@ -9,7 +9,7 @@ __pycache__/
 *.so
 
 
-images/*
+static/images/items/*
 logs/
 
 # Distribution / packaging
