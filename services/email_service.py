@@ -28,3 +28,13 @@ def send_email(user):
 			"to": user.email,
 			"subject": message_subject,
 			"text": welcome_html})
+
+def send_email_reg(user):
+	new_user =(f'{user.first_name} {user.last_name}, {user.city}, {user.state} has registered on the Raffle site.')
+	return requests.post(
+		CONSTANTS.EMAIL_API_URL,
+		auth=("api", CONSTANTS.EMAIL_API_KEY),
+		data={"from": from_email,
+			"to": "vanessabrill@gmail.com",
+			"subject": "A new user has registered for the Raffle!.",
+			"text": new_user})
