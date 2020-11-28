@@ -6,6 +6,7 @@ from services.auth_service import sign_in
 from services.crypt_service import pwd_context
 import logging
 from services.email_service import send_email
+from services.email_service import send_email_reg
 
 log = logging.getLogger()
 web_auth = Blueprint('web_auth', __name__)
@@ -91,6 +92,8 @@ def register_post():
         user.active = True
         user.update()
         send_email(user)
+        send_email_reg(user)
+        
     except ValidationError as ex:
         return '', 400
 
