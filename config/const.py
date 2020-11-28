@@ -14,7 +14,7 @@ GLOBAL_TICKET_ID = 1
 # Email Config - Mailgun
 EMAIL_API_URL = os.environ.get('EMAIL_API_URL')
 EMAIL_API_KEY = os.environ.get('EMAIL_API_KEY')
-NEW_USER_NOTIFY_EMAIL = 'nexthoprouter@gmail.com'
+NEW_USER_NOTIFY_EMAIL = 'null@null'
 
 # Database
 DB_ENGINE = 'mysql+pymysql'
