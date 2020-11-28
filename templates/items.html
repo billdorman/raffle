@@ -64,7 +64,7 @@
                 <article class="card card-product-list">
                     <div class="row no-gutters">
                         <aside class="col-md-3">
-                            <a class="img-wrap">
+                            <a href="{{ item.images[0].path }}" target="_blank" class="img-wrap">
                                 {% if item.images | length > 0 %}
                                     <img src="{{ item.images[0].path }}" style="object-fit: cover; width: 100%">
                                 {% else %}
