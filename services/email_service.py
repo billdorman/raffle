@@ -25,6 +25,6 @@ def send_email_reg(user):
 		CONSTANTS.EMAIL_API_URL,
 		auth=("api", CONSTANTS.EMAIL_API_KEY),
 		data={"from": from_email,
-			"to": "nexthoprouter@gmail.com",
+			"to": CONSTANTS.NEW_USER_NOTIFY_EMAIL,
 			"subject": "A new user has registered for the Raffle!.",
 			"text": new_user})

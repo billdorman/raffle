@@ -3,10 +3,10 @@ import os
 
 # Server Name
 SERVER_NAME = "RAFFLE_SERVER_01"
-BASE_URL = "http://localhost:5000"
+BASE_URL = "https://sweenypto.org"
 
-# SQUARE_API_URL = "connect.squareup.com"
-SQUARE_API_URL = "connect.squareupsandbox.com"
+SQUARE_API_URL = "connect.squareup.com"
+#SQUARE_API_URL = "connect.squareupsandbox.com"
 
 # Global Ticket
 GLOBAL_TICKET_ID = 1
@@ -14,6 +14,7 @@ GLOBAL_TICKET_ID = 1
 # Email Config - Mailgun
 EMAIL_API_URL = os.environ.get('EMAIL_API_URL')
 EMAIL_API_KEY = os.environ.get('EMAIL_API_KEY')
+NEW_USER_NOTIFY_EMAIL = 'nexthoprouter@gmail.com'
 
 # Database
 DB_ENGINE = 'mysql+pymysql'
