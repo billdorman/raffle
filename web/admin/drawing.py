@@ -30,7 +30,7 @@ def inject_globals():
 def drawing_get(id):
     log.info("web_admin_drawings.drawing_get")
     item = Item.query.get(id)
-    tickets = Ticket.query.filter(Ticket.item_id.in_((item.id, CONSTANTS.GLOBAL_TICKET_ID)), Ticket.active == True).all().order_by("id desc")
+    tickets = Ticket.query.filter(Ticket.item_id.in_((item.id, CONSTANTS.GLOBAL_TICKET_ID)), Ticket.active == True).all()
 
     return render_template('admin/drawing.html', item=item, tickets=tickets)
 
