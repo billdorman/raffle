@@ -87,10 +87,10 @@ def drawing_post_ajax(id):
     log.debug(f'Winning Ticket Item ID: {winning_ticket.item_id}')
     log.debug(f'Winning Ticket ID: {winning_ticket.id}')
 
-    # Ensure Global Tickets remain active for additional drawings. 
-    if winning_ticket.item_id == CONSTANTS.GLOBAL_TICKET_ID:
-        winning_ticket.active = True
-        winning_ticket.update()
+    # # Ensure Global Tickets remain active for additional drawings. 
+    # if winning_ticket.item_id == CONSTANTS.GLOBAL_TICKET_ID:
+    #     winning_ticket.active = True
+    #     winning_ticket.update()
 
     res = {
         "winning_user": user_schema.dump(winning_user),
