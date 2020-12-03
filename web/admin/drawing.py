@@ -6,9 +6,15 @@ from models.user import User, UserSchema
 from config import const as CONSTANTS
 import logging
 import random
+import string
 
 log = logging.getLogger()
 web_admin_drawings = Blueprint('web_admin_drawings', __name__)
+
+# Used in the seed generator for the random.seed() function.
+def string_num_generator(size):
+    chars = string.ascii_lowercase + string.digits + string.ascii_uppercase
+    return ''.join(random.choice(chars) for _ in range(size))
 
 
 # context_processor used for loading global blueprint variables
@@ -55,6 +61,13 @@ def drawing_post_ajax(id):
         }
         return jsonify(res)
 
+    prng = string_num_generator(128)
+    log.debug(f'PRNG Value: {prng}')
+    
+    # Set the Random Seed value
+    random.seed(prng)
+
+    #Select a Winning Ticket
     winning_ticket = random.choice(tickets)
 
     winning_user = User.query.get(winning_ticket.user_id)
