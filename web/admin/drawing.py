@@ -29,7 +29,7 @@ def inject_globals():
 def drawing_get(id):
     log.info("web_admin_drawings.drawing_get")
     item = Item.query.get(id)
-    tickets = Ticket.query.filter(Ticket.item_id.in_((item.id, CONSTANTS.GLOBAL_TICKET_ID)), Ticket.active == True).all()
+    tickets = Ticket.query.filter(Ticket.item_id.in_((item.id, CONSTANTS.GLOBAL_TICKET_ID)), Ticket.active == True).all().order_by("id desc")
 
     return render_template('admin/drawing.html', item=item, tickets=tickets)
 
@@ -44,7 +44,7 @@ def drawing_post_ajax(id):
     user_schema = UserSchema()
 
     item = Item.query.get(id)
-    tickets = Ticket.query.filter(Ticket.item_id.in_((item.id, CONSTANTS.GLOBAL_TICKET_ID)), Ticket.active == True).all()
+    tickets = Ticket.query.filter(Ticket.item_id.in_((item.id, CONSTANTS.GLOBAL_TICKET_ID)), Ticket.active == True).order_by(asc(Ticket.id)).all()
 
     # Make sure that the item is still available
     if item.available is False:
@@ -68,6 +68,7 @@ def drawing_post_ajax(id):
     random.seed(prng)
 
     #Select a Winning Ticket
+    log.debug(f'Tickets: {tickets}')
     winning_ticket = random.choice(tickets)
 
     winning_user = User.query.get(winning_ticket.user_id)
